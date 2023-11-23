@@ -1,4 +1,4 @@
-import { Blog } from "@/types/blog.type";
+import { Blog } from "@/types/blog";
 
 export default async function Page({ params }: { params: { id: string } }) {
     const { message } = await fetch('http://localhost:3000/api/blog').then(res => res.json())
