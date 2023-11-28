@@ -1,4 +1,4 @@
-export {};
+export {}
 declare global {
-    var _mongo: Promise<MongoClient> | undefined;
+  var _mongo: Promise<MongoClient> | undefined
 }
