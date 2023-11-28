@@ -1,8 +1,7 @@
+import { MDXRemote } from 'next-mdx-remote/rsc'
 import { Blog } from "@/types/blog";
 
 export default async function Page({ params }: { params: { id: string } }) {
-    const { message } = await fetch('http://localhost:3000/api/blog').then(res => res.json())
-
     return (
         <div>
             <span>
@@ -10,10 +9,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             </span>
             <div>
                 {message.map((el:Blog) => (
-                    <div key={el._id}>
-                        <div>{el._id}</div>
-                        <div>{el.content}</div>
-                    </div>
+                   <MDXRemote source={el.content} />
                 ))}
             </div>
         </div>
