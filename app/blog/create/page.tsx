@@ -1,14 +1,18 @@
 'use client'
-import React, { useRef, useState } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
 import '@toast-ui/editor/dist/toastui-editor.css'
 
 import { Editor } from '@toast-ui/react-editor'
 
 export default function BlogCreatePage() {
+  const initialValue = '# Hello World'
+
   const editorRef = useRef<Editor>(null)
-  const [value, _] = useState(
-    "**Hello world!!!** \n\n ```js \n console.log('Hello world!!!') \n ```",
-  )
+  const editorHeight = useMemo(() => {
+    if (typeof window === 'undefined') return '800px'
+    return `${window.innerHeight - 400}px`
+  }, [])
+
   const handleClickSaveBlog = async () => {
     const editorMarkdown = editorRef.current?.getInstance().getMarkdown()
 
@@ -19,26 +23,31 @@ export default function BlogCreatePage() {
       },
       body: JSON.stringify({ content: editorMarkdown }),
     }).then((res) => res.json())
-    console.log('save blog', result)
   }
+
   return (
-    <main>
-      <section data-color-mode="dark">
-        <form className="">
-          <button onClick={handleClickSaveBlog}>save</button>
-        </form>
-        <div className="px-6">
-          <Editor
-            initialValue={value}
-            previewStyle="vertical"
-            height="800px"
-            initialEditType="markdown"
-            useCommandShortcut={true}
-            language={'ko-KR'}
-            ref={editorRef}
-          />
-        </div>
-      </section>
-    </main>
+    <section
+      data-color-mode="dark"
+      className="max-w-screen-2xl mx-auto flex flex-col gap-4 mt-6"
+    >
+      <div className="flex justify-end">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={handleClickSaveBlog}
+        >
+          Save
+        </button>
+      </div>
+      <Editor
+        initialValue={initialValue}
+        previewStyle="vertical"
+        height={editorHeight}
+        initialEditType="markdown"
+        useCommandShortcut={true}
+        language={'ko-KR'}
+        ref={editorRef}
+        theme="dark"
+      />
+    </section>
   )
 }

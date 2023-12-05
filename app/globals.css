@@ -25,3 +25,7 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.toastui-editor-md-container {
+  background-color: whitesmoke;
+}
