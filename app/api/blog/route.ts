@@ -12,6 +12,8 @@ export async function POST(request: Request) {
     title,
     tags,
     content,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   };
 
   const db = (await connectDB).db('test');
