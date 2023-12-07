@@ -3,6 +3,6 @@ export type Blog = {
   title: string;
   tags: string[];
   content: string;
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 };
