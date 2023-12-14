@@ -1,4 +1,5 @@
 import { Blog } from '@/types/blog';
+import Link from 'next/link';
 
 interface BlogCardProps {
   blog: Blog;
@@ -12,9 +13,9 @@ export default function BlogCard({ blog }: BlogCardProps) {
 
   return (
     <div className="w-full min-h-30 relative flex flex-col gap-6 my-4">
-      <div className="">
+      <Link href={`/blog/${blog._id}`}>
         <span className="text-xl font-medium">{blog.title}</span>
-      </div>
+      </Link>
       <div className="flex justify-between">
         <div>
           {blog.tags.map((tag, index) => (
