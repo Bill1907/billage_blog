@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
+
+const withMDX = require('@next/mdx')();
+const removeImports = require('next-remove-imports')();
+
 const nextConfig = {
   experimental: {
-    mdxRs: true,
     serverComponentsExternalPackages: ['@acme/ui'],
   },
   images: {
@@ -9,9 +12,6 @@ const nextConfig = {
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-}
+};
 
-const removeImports = require('next-remove-imports')()
-const withMDX = require('@next/mdx')()
-
-module.exports = removeImports(withMDX(nextConfig))
+module.exports = removeImports(withMDX(nextConfig));
